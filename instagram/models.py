@@ -10,8 +10,10 @@ class Image(models.Model):
     
     def save_image(self):
         self.save()
+    @classmethod   
+    def delete_image(cls,delete_id):
+        Image.objects.filter(pk=delete_id).delete()
         
-    
         
     def __str__(self):
         return self.image_name

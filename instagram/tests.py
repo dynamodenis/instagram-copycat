@@ -14,6 +14,6 @@ class TestImage(TestCase):
         self.assertTrue(len(save)==1)
         
     def test_delete_image(self):
-        Image.delete_image(self.image.id)
+        Image.delete_image(self.image.pk)
         deleted=Image.objects.all()
         self.assertTrue(len(deleted)==0)
