@@ -8,6 +8,11 @@ class Image(models.Model):
     likes=models.ImageField(default=0)
     posted=models.DateTimeField(auto_now_add=True)
     
+    def save_image(self):
+        self.save()
+        
+    
+        
     def __str__(self):
         return self.image_name
     
