@@ -5,7 +5,7 @@ class Image(models.Model):
     image=models.ImageField(upload_to='images/', blank=True,default='default.jpg')
     image_name=models.CharField(max_length=30)
     image_caption=models.TextField()
-    likes=models.ImageField(default=0)
+    likes=models.IntegerField(default=0)
     posted=models.DateTimeField(auto_now_add=True)
     
     def save_image(self):
@@ -19,6 +19,11 @@ class Image(models.Model):
         Image.objects.filter(pk=image_id).update(image_caption=caption)
         updated=Image.objects.get(pk=image_id)
         return updated
+    @classmethod
+    def get_comments(cls,image_id):
+        image=Image.objects.get(pk=image_id)
+        image_comments=image.comments_set.all()
+        return image_comments
               
     def __str__(self):
         return self.image_name
