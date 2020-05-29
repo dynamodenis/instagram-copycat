@@ -17,3 +17,7 @@ class TestImage(TestCase):
         Image.delete_image(self.image.pk)
         deleted=Image.objects.all()
         self.assertTrue(len(deleted)==0)
+        
+    def test_update_caption(self):
+        updated=Image.update_caption(self.image.pk,"Test image has been updated")
+        self.assertTrue(updated.image_caption,"Test image has been updated")

@@ -14,7 +14,12 @@ class Image(models.Model):
     def delete_image(cls,delete_id):
         Image.objects.filter(pk=delete_id).delete()
         
-        
+    @classmethod
+    def update_caption(cls,image_id,caption):
+        Image.objects.filter(pk=image_id).update(image_caption=caption)
+        updated=Image.objects.get(pk=image_id)
+        return updated
+              
     def __str__(self):
         return self.image_name
     
