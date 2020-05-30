@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
+    'crispy_forms',
     'register.apps.RegisterConfig',
     'instagram.apps.InstagramConfig',
     'django.contrib.admin',
@@ -141,3 +142,7 @@ STATICFILES_DIRS=[
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+CRISPY_TEMPLATE_PACK='bootstrap4'
+
+LOGIN_REDIRECT_URL='instagram:index'

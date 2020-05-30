@@ -23,12 +23,13 @@
             <a class="navbar-brand" id='name' href="#">InstaPost</a>
           </div>
     </nav>
-    {% if messages %}
-        {% for message in messages%}
-            <div class="alert alert-{{message.tags}}">{{message}}</div>
-        {% endfor%}
-    {% endif %}
-
+    <div class="text-center">
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert alert-{{message.tags}}">{{message}}</div>
+            {% endfor%}
+        {% endif %}
+    </div>
     {% block content%}
     {% endblock %}
     {% block scripts %}

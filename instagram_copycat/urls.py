@@ -17,11 +17,16 @@ from django.contrib import admin
 from django.urls import include, path
 from register import views as register_views
 from django_registration.backends.one_step.views import RegistrationView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('instagram.urls', namespace='instagram')),
     path('register/',register_views.register,name='register'),
+    path('login/',auth_views.LoginView.as_view(),name='login'),
+    path('logout/',auth_views.LogoutView.as_view(),name='logout'),
+    
+    #AN ALTERBATIVVE FOR REGISTRATION FOR REFERENCE
     path('accounts/register/',
         RegistrationView.as_view(success_url='/accounts/login/'),
         name='django_registration_register'),

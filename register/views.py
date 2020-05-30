@@ -9,8 +9,8 @@ def register(request):
         if form.is_valid():
             form.save()
             username=form.cleaned_data.get('username')
-            messages.success(request,f'Account for {username} created successfuly!')
-            return redirect('instagram:index')
+            messages.success(request,f'Account for created successfuly! You can login.')
+            return redirect('login')
         
     else:
         form=RegisterUser()
