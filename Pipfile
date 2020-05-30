@@ -12,6 +12,7 @@ pillow = "*"
 psycopg2 = "*"
 python-decouple = "*"
 dj-database-url = "*"
+django-bootstrap4 = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,0 +1,33 @@
+{% load bootstrap4%}
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title%}
+    <title>InstaPost | {{title}}</title>
+    {% else %}
+    <title>InstaPost</title>
+    {% endif%}
+    {% block styles %}
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="{%static 'css/index.css'%}"  >
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Tangerine'>
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-dark bg-dark">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" id='name' href="#">InstaPost</a>
+          </div>
+    </nav>
+    {% block content%}
+    {% endblock %}
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript%}
+    {% endblock %}
+</body>
+</html>
