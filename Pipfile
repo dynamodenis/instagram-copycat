@@ -13,6 +13,7 @@ psycopg2 = "*"
 python-decouple = "*"
 dj-database-url = "*"
 django-bootstrap4 = "*"
+django-registration = "*"
 
 [requires]
 python_version = "3.6"
