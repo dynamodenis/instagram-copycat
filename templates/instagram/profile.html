@@ -2,7 +2,7 @@
 {% load bootstrap4 %} 
 {% load static %}
 {% block title%}
-{{profile.user.username}}
+{{user.username}}
 {% endblock%}
 {% block content%}
 <div class="container-fluid">
@@ -12,14 +12,14 @@
         <div class="card  mb-3" style="width: auto;">
             <div class="row">
                 <div class="col-lg-6 col-xs-12 ml-2">
-                    <img src="{{profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 220px; height: 220px;">
+                    <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 220px; height: 220px;">
                 </div>
                 <div class="col-lg-6 col-xs-12 ml-2">
-                    <h2 class="card-title">{{profile.user.username}}</h2>
+                    <h2 class="card-title">{{user.username}}</h2>
                     <hr style="border-width: 2px;">
-                    <p class="card-text">Email Adress: {{profile.user.email}}</p>
+                    <p class="card-text">Email Adress: {{user.email}}</p>
                     {% if profile.bio%}
-                    <p class="card-text">About Me: {{profile.bio}}</p>
+                    <p class="card-text">About Me: {{user.profile.bio}}</p>
                     {%endif%} 
      
                     <a href="" class="btn btn-success"><small>Update Settings</small></a><hr>

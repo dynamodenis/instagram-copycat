@@ -8,7 +8,7 @@ from .models import Profile,Image,Comments
 def index(request):
     return render(request,'instagram/index.html')
 
-@login_required(login_url='/login/')
+@login_required
 def new_image(request):
     current_user=request.user
     if request.method=='POST':
@@ -24,7 +24,6 @@ def new_image(request):
         
     return render(request, 'instagram/image.html',{'form':form})
 
-
-def profile(request,user_id):
-    profile =get_object_or_404(Profile,pk=user_id)
-    return render(request,'instagram/profile.html',{'profile':profile})
+@login_required
+def profile(request):
+    return render(request,'instagram/profile.html')

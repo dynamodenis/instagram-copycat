@@ -25,7 +25,7 @@
           <div class="float-right">
             {% if user.is_authenticated%}
                 <a href="{% url 'instagram:new_image' %}" class="nav-item nav-link">Create Post</a>
-                <a href="{% url 'instagram:profile' user.pk %}" class="nav-item nav-link">{{user.username}}</a>
+                <a href="{% url 'instagram:profile'%}" class="nav-item nav-link">{{user.username}}</a>
                 <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
             {% else %}
                 <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>

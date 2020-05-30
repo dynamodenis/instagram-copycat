@@ -23,13 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('instagram.urls', namespace='instagram')),
     path('register/',register_views.register,name='register'),
-    path('login/',auth_views.LoginView.as_view(),name='login'),
-    path('logout/',auth_views.LogoutView.as_view(),name='logout'),
+    path('login/',auth_views.LoginView.as_view(template_name='registration/login.html'),name='login'),
+    path('logout/',auth_views.LogoutView.as_view(template_name='registration/logout.html'),name='logout'),
     
     #AN ALTERBATIVVE FOR REGISTRATION FOR REFERENCE
-    path('accounts/register/',
-        RegistrationView.as_view(success_url='/accounts/login/'),
-        name='django_registration_register'),
-    path('accounts/', include('django_registration.backends.one_step.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/register/',
+    #     RegistrationView.as_view(success_url='/accounts/login/'),
+    #     name='django_registration_register'),
+    # path('accounts/', include('django_registration.backends.one_step.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
 ]
