@@ -41,7 +41,7 @@ class Comments(models.Model):
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     picture=models.ImageField(upload_to='profile/',default='default.png')
-    bio=models.CharField(max_length=100)
+    bio=models.CharField(max_length=100,blank=True)
     
     def __str__(self):
         return self.user.username

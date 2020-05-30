@@ -5,37 +5,29 @@
 {{profile.user.username}}
 {% endblock%}
 {% block content%}
-<div class="container">
+<div class="container-fluid">
+<div class="row">
     <div class="col-md-2 col-lg-3"></div>
     <div class="col-md-8 col-lg-6 col-sm-10">
-        <div class="card  mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-md-6 col-lg-6 col-sm-4  col-xs-4 m-3" ><hr>
-                    {% if profile.profile_pic_path %}
-                    <img src="{{image}}" class="img-circle" alt="..." style="width: 220px; height: 220px;">
-                    {%else%}
-                    <img src="{{url_for('static', filename='profile/profile.png')}}" class="card-img rounded-circle" alt="" style="width: auto; height: auto;" class="img-responsive">
-                    {% endif %}
+        <div class="card  mb-3" style="width: auto;">
+            <div class="row">
+                <div class="col-lg-6 col-xs-12 ml-2">
+                    <img src="{{profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 220px; height: 220px;">
                 </div>
-                <div class="col-md-6 col-lg-6 col-sm-8 col-xs-8">
-                    <div class="card-body">
-                    <h3 class="card-title">{{user.username| capitalize}}</h3>
+                <div class="col-lg-6 col-xs-12 ml-2">
+                    <h2 class="card-title">{{profile.user.username}}</h2>
                     <hr style="border-width: 2px;">
-                    <p class="card-text">Email Adress: {{user.email}}</p>
-                    {% if user.address%}
-                    <p class="card-text">Location Address: {{user.address}}</p>
-                    {%endif%}
-                    {% if user.contact%}
-                    <p class="card-text">Contact Info: {{user.contact}}</p>
-                    {%endif%}
-                    <p class="card-text">About Me: <span>{{user.bio}}</span></p> 
+                    <p class="card-text">Email Adress: {{profile.user.email}}</p>
+                    {% if profile.bio%}
+                    <p class="card-text">About Me: {{profile.bio}}</p>
+                    {%endif%} 
      
-                    <a href="{{url_for('main.update_profile',uname=user.username)}}" class="btn btn-success"><small>Update Settings</small></a><hr>
-                    </div>
+                    <a href="" class="btn btn-success"><small>Update Settings</small></a><hr>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-2 col-lg-3"></div>
+</div>
 </div>
 {% endblock%}
