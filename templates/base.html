@@ -20,7 +20,7 @@
     <nav class="navbar navbar-inverse navbar-dark bg-dark">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" id='name' href="#">InstaPost</a>
+            <a class="navbar-brand" id='name' href="{% url 'instagram:index'%}">InstaPost</a>
           </div>
           <div class="float-right">
             {% if user.is_authenticated%}

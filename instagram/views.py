@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile,Image,Comments
 
 # Create your views here.
-
+@login_required
 def index(request):
-    return render(request,'instagram/index.html')
+    images=Image.objects.all()
+    return render(request,'instagram/index.html',{'images':images})
 
 @login_required
 def new_image(request):
