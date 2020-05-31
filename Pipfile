@@ -15,6 +15,9 @@ dj-database-url = "*"
 django-bootstrap4 = "*"
 django-registration = "*"
 django-crispy-forms = "*"
+django-heroku = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.6"
