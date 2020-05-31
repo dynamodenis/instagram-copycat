@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Image,Comments,Profile
+from .models import Images,Comments,Profile
 # Register your models here.
 
 class CommentInline(admin.TabularInline):
@@ -19,5 +19,5 @@ class ImageInline(admin.ModelAdmin):
 admin.site.site_header='InstaPost Admin'
 admin.site.site_title='InstaPost Admin Dashboard'
 
-admin.site.register(Image,ImageInline)
+admin.site.register(Images,ImageInline)
 admin.site.register(Profile)

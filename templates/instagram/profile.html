@@ -12,7 +12,7 @@
         <div class="card  mb-3" style="width: 100%;">
             <div class="row">
                 <div class="col-lg-6 col-xs-12 ml-2">
-                    <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 200px; height: 220px;">
+                    <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 220px; height: 220px;">
                 </div>
                 <div class="col-lg-6 col-xs-12">
                     <h2 class="card-title">{{user.username}}</h2>
@@ -33,10 +33,10 @@
 <div class="row">
     <div class="col-lg-12 col-md-12" >
         <div class="row">
-            {%for image in user.image_set.all%}
+            {%for image in user.images_set.all%}
             <div class="col-lg-4 col-md-4 mb-2" style="padding-right: 10px;">
                 <div class="card" style="width: 100%; margin-left: 10px;">
-                    <a href="{% url 'instagram:comment' image.pk %}"><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
+                    <a href="{% url 'instagram:comment' image.pk %}"><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:50vh; width: 100%;" ></a>
                     <div class="card-body">
                         <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> </a style="text-decoration: none; color: black;"> <i class="far fa-heart"></i></p>
                         <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>

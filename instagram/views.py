@@ -1,16 +1,17 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import NewImage,NewComment,UpdateUser,UpdateProfile
 from django.contrib.auth.decorators import login_required
-from .models import Profile,Image,Comments
+from .models import Profile,Images,Comments
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import messages
+from PIL import Image
 
 # Create your views here.
 @login_required
 def index(request):
-    images=Image.objects.order_by('-posted')
+    images=Images.objects.order_by('-posted')
     return render(request,'instagram/index.html',{'images':images})
 
 @login_required
@@ -53,8 +54,8 @@ def update_profile(request):
 
 @login_required
 def comment(request,image_id):
-    image=Image.objects.get(pk=image_id)
-    comments=Image.get_comments(image_id)
+    image=Images.objects.get(pk=image_id)
+    comments=Images.get_comments(image_id)
     is_liked=False
     if image.likes.filter(id=request.user.id):
         is_liked=True
@@ -74,7 +75,7 @@ def comment(request,image_id):
 
 
 def likes(request):
-    image=get_object_or_404(Image,pk=request.POST.get('image_id'))
+    image=get_object_or_404(Images,pk=request.POST.get('image_id'))
     is_liked=False
     if image.likes.filter(id=request.user.id):
         image.likes.remove(request.user)

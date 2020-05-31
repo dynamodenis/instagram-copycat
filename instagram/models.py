@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 # Create your models here.
-class Image(models.Model):
+class Images(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     image=models.ImageField(upload_to='images/')
     image_name=models.CharField(max_length=30, blank=True)
@@ -10,20 +11,30 @@ class Image(models.Model):
     likes=models.ManyToManyField(User,related_name='image_likes', blank=True)
     posted=models.DateTimeField(auto_now_add=True)
     
+    def save(self):
+        super().save()
+        
+        img=Image.open(self.image.path)
+        
+        if img.height>720 and img.width>720:
+            size=(720,720)
+            img.thumbnail(size)
+            img.save(self.image.path)
+    
     def save_image(self):
         self.save()
     @classmethod   
     def delete_image(cls,delete_id):
-        Image.objects.filter(pk=delete_id).delete()
+        Images.objects.filter(pk=delete_id).delete()
         
     @classmethod
     def update_caption(cls,image_id,caption):
-        Image.objects.filter(pk=image_id).update(image_caption=caption)
-        updated=Image.objects.get(pk=image_id)
+        Images.objects.filter(pk=image_id).update(image_caption=caption)
+        updated=Images.objects.get(pk=image_id)
         return updated
     @classmethod
     def get_comments(cls,image_id):
-        image=Image.objects.get(pk=image_id)
+        image=Images.objects.get(pk=image_id)
         image_comments=image.comments_set.all()
         return image_comments
               
@@ -31,7 +42,7 @@ class Image(models.Model):
         return self.image_caption
     
 class Comments(models.Model):
-    image=models.ForeignKey(Image, on_delete=models.CASCADE)
+    image=models.ForeignKey(Images, on_delete=models.CASCADE)
     comment=models.CharField(max_length=500)
     likes=models.ManyToManyField(User,related_name='comment_likes', blank=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE)
@@ -46,3 +57,12 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
+    
+    def save(self):
+        super().save()
+        img=Image.open(self.picture.path)
+        
+        if img.height >300 and img.width>300:
+            size=(300,300)
+            img.thumbnail(size)
+            img.save(self.picture.path)

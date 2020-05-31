@@ -1,10 +1,10 @@
-from .models import Image,Comments,Profile
+from .models import Images,Comments,Profile
 from django import forms
 from django.contrib.auth.models import User
 
 class NewImage(forms.ModelForm):
     class Meta:
-        model=Image
+        model=Images
         fields=['image_caption','image']
         
 class NewComment(forms.ModelForm):
