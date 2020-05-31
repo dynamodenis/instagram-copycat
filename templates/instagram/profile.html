@@ -9,12 +9,12 @@
 <div class="row">
     <div class="col-md-2 col-lg-3"></div>
     <div class="col-md-8 col-lg-6 col-sm-10">
-        <div class="card  mb-3" style="width: auto;">
+        <div class="card  mb-3" style="width: 100%;">
             <div class="row">
                 <div class="col-lg-6 col-xs-12 ml-2">
-                    <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 220px; height: 220px;">
+                    <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 200px; height: 220px;">
                 </div>
-                <div class="col-lg-6 col-xs-12 ml-2">
+                <div class="col-lg-6 col-xs-12">
                     <h2 class="card-title">{{user.username}}</h2>
                     <hr style="border-width: 2px;">
                     <p class="card-text">Email Adress: {{user.email}}</p>
@@ -22,12 +22,31 @@
                     <p class="card-text">About Me: {{user.profile.bio}}</p>
                     {%endif%} 
      
-                    <a href="" class="btn btn-success"><small>Update Settings</small></a><hr>
+                    <a href="" class="btn btn-success btn-sm"><small>Update Settings</small></a><hr>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-2 col-lg-3"></div>
 </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12" >
+        <div class="row">
+            {%for image in user.image_set.all%}
+            <div class="col-lg-4 col-md-4 mb-2" style="padding-right: 10px;">
+                <div class="card" style="width: 100%; margin-left: 10px;">
+                    <a href="{% url 'instagram:comment' image.pk %}"><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
+                    <div class="card-body">
+                        <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> </a style="text-decoration: none; color: black;"> <i class="far fa-heart"></i></p>
+                        <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>
+                        <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
+
+                    </div>  
+                </div>               
+            </div>
+            {%endfor%}
+        </div>
+    </div>
 </div>
 {% endblock%}
