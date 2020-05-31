@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import NewImage,NewComment
+from .forms import NewImage,NewComment,UpdateUser,UpdateProfile
 from django.contrib.auth.decorators import login_required
 from .models import Profile,Image,Comments
 from django.http import HttpResponseRedirect
@@ -31,6 +31,13 @@ def new_image(request):
 @login_required
 def profile(request):
     return render(request,'instagram/profile.html')
+
+@login_required
+def update_profile(request):
+    user_update=UpdateUser
+    profile_update=UpdateProfile
+    return render(request,'instagram/update.html',{'user_update':user_update,'profile_update':profile_update})
+
 
 @login_required
 def comment(request,image_id):

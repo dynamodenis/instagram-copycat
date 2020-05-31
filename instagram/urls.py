@@ -11,6 +11,7 @@ urlpatterns=[
     path('like/',views.likes, name='likes'),
     path('search/',views.search, name='search'),
     path('<int:user_id>/profile',views.post_user, name='post_user'),
+    path('update/',views.update_profile, name='update_profile'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
