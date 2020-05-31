@@ -17,13 +17,9 @@
                 </div>
                 <a href="{% url 'instagram:comment' image.pk %}"><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
                 <div class="card-body">
-                    <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> 
-                        <form action="{% url 'instagram:likes' %}" method="POST">
-                        {% csrf_token%}
-                        <button type="submit" name="image_id" value="{{image.id}}"></a style="text-decoration: none; color: black;" > <i class="far fa-heart"></i></button>
-                        </form>
+                    <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> </a style="text-decoration: none; color: black;"> <i class="far fa-heart"></i>
                     </p>
-                    <p class="" style="font-weight:bolder ;">{{image.likes}} <span class="ml-1">likes</span></p>
+                    <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>
                     <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
                 </div>
                 

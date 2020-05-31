@@ -15,8 +15,19 @@
                 </div>
                 <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
                 <div class="card-body">
-                    <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}"><i class="far fa-comment"></i> </a> <i class="far fa-heart"></i></p>
-                    <p class="" style="font-weight:bolder ;">{{image.likes}} <span class="ml-1">likes</span></p>
+                    <div class="form-inline">
+                        <p style="font-size: 1.8em;"> <button class="border mt-3"><a href="{% url 'instagram:comment' image.pk %}" style="text-decoration: none; color: black;"><i class="far fa-comment"></i></a> </button>
+                            <form action="{% url 'instagram:likes' %}" method="POST" class="ml-3 mt-0">
+                                {% csrf_token%}
+                                {% if is_liked%}
+                                <button type="submit" name="image_id" value="{{image.id}}" class="border bg-danger" style="font-size: 1.8em;"><a style="text-decoration: none;"> <i class="far fa-heart"></i></a></button>
+                                {% else%}
+                                <button type="submit" name="image_id" value="{{image.id}}" class="border" style="font-size: 1.8em;"><a style="text-decoration: none; color: black;" > <i class="far fa-heart"></i></a></button>
+                                {% endif %}
+                            </form> 
+                        </p>
+                    </div>
+                    <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>
                     <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
                 </div>  <hr>
                 <h4 class="ml-3" style="font-weight: bold;"> View all comments </h4> 

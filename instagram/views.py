@@ -36,10 +36,19 @@ def profile(request):
 def comment(request,image_id):
     image=Image.objects.get(pk=image_id)
     comments=Image.get_comments(image_id)
-    return render(request, 'instagram/comment.html',{'image':image,'comments':comments})
+    is_liked=False
+    if image.likes.filter(id=request.user.id):
+        is_liked=True
+    return render(request, 'instagram/comment.html',{'image':image,'comments':comments,'is_liked':is_liked})
 
 
 def likes(request):
     image=get_object_or_404(Image,pk=request.POST.get('image_id'))
-    image.likes.add(request.user)
-    return HttpResponseRedirect(reverse('instagram:index'))
+    is_liked=False
+    if image.likes.filter(id=request.user.id):
+        image.likes.remove(request.user)
+        is_liked=False
+    else:
+        image.likes.add(request.user)
+        is_liked=True
+    return HttpResponseRedirect(reverse('instagram:comment', args=(image.id,)))
