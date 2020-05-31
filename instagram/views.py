@@ -5,6 +5,7 @@ from .models import Profile,Image,Comments
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 @login_required
@@ -34,8 +35,19 @@ def profile(request):
 
 @login_required
 def update_profile(request):
-    user_update=UpdateUser
-    profile_update=UpdateProfile
+    if request.method=="POST":
+        user_update=UpdateUser(request.POST,instance=request.user)
+        profile_update=UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
+        if user_update.is_valid() and profile_update.is_valid():
+            user_update.save()
+            profile_update.save()
+            
+            messages.success(request,f'Updated Successfully!')
+            return redirect('instagram:profile')
+        
+    else:
+        user_update=UpdateUser(instance=request.user)
+        profile_update=UpdateProfile(instance=request.user.profile)
     return render(request,'instagram/update.html',{'user_update':user_update,'profile_update':profile_update})
 
 

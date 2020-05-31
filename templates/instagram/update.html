@@ -14,7 +14,7 @@
         </div>
         <div class="panel-body">
 
-          <form  action="" method="post">
+          <form  action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form user_update%}
             {% bootstrap_form profile_update%}
