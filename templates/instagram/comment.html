@@ -29,16 +29,23 @@
                     </div>
                     <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>
                     <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
+
+                    <form  action="{%url 'instagram:comment' image.pk%}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+                    
+                        {% bootstrap_form form%}
+                        <input type="submit" class="btn btn-success btn-lg" value="Comment">
+                      </form>
                 </div>  <hr>
                 <h4 class="ml-3" style="font-weight: bold;"> View all comments </h4> 
                 <ul style="list-style-type: none;">
                     {% for comment in comments%}
                     <li class="row">
                         <div class="col-md-2 col-lg-2 ">
-                            <img src="{{comment.image.user.profile.picture.url}}" alt="IMAGE" style="height: 40px; width: 40px;" class="rounded-circle">
+                            <img src="{{comment.user.profile.picture.url}}" alt="IMAGE" style="height: 40px; width: 40px;" class="rounded-circle">
                         </div>
                         <div class="col-md-8 col-lg-8" style="font-size: 0.9em;">
-                            <a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{comment.image.user.username}}</a><br>
+                            <a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{comment.user.username}}</a><br>
                             <span class="rounded" >{{comment.comment}} </span>                        
                         </div>
                         <div class="col-md-2 col-lg-2"></div>

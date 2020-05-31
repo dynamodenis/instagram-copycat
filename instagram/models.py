@@ -32,8 +32,9 @@ class Image(models.Model):
     
 class Comments(models.Model):
     image=models.ForeignKey(Image, on_delete=models.CASCADE)
-    comment=models.TextField()
+    comment=models.CharField(max_length=500)
     likes=models.ManyToManyField(User,related_name='comment_likes', blank=True)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.comment

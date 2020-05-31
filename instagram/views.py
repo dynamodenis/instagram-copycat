@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import NewImage
+from .forms import NewImage,NewComment
 from django.contrib.auth.decorators import login_required
 from .models import Profile,Image,Comments
 from django.http import HttpResponseRedirect
@@ -39,7 +39,19 @@ def comment(request,image_id):
     is_liked=False
     if image.likes.filter(id=request.user.id):
         is_liked=True
-    return render(request, 'instagram/comment.html',{'image':image,'comments':comments,'is_liked':is_liked})
+        
+    current_user=request.user
+    if request.method=='POST':
+        form=NewComment(request.POST)
+        if form.is_valid():
+            comment=form.save(commit=False)
+            comment.image=image
+            comment.user=current_user
+            comment.save()  
+            
+    else:
+        form=NewComment() 
+    return render(request, 'instagram/comment.html',{'image':image,'comments':comments,'is_liked':is_liked, 'form':form})
 
 
 def likes(request):
