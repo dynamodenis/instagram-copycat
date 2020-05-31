@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-md-2"></div>
+        <div class="col-lg-8 col-md-8 mt-2">
+            <div class="card m-3" style="width: auto; margin-left: 10px;">
+                <div>
+                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a>
+                </div>
+                <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
+                <div class="card-body">
+                    <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}"><i class="far fa-comment"></i> </a> <i class="far fa-heart"></i></p>
+                    <p class="" style="font-weight:bolder ;">{{image.likes}} <span class="ml-1">likes</span></p>
+                    <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
+                </div>  <hr>
+                <h4 class="ml-3" style="font-weight: bold;"> View all comments </h4> 
+                <ul style="list-style-type: none;">
+                    {% for comment in comments%}
+                    <li class="row">
+                        <div class="col-md-2 col-lg-2 ">
+                            <img src="{{comment.image.user.profile.picture.url}}" alt="IMAGE" style="height: 40px; width: 40px;" class="rounded-circle">
+                        </div>
+                        <div class="col-md-8 col-lg-8" style="font-size: 0.9em;">
+                            <a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{comment.image.user.username}}</a><br>
+                            <span class="rounded" >{{comment.comment}} </span>                        
+                        </div>
+                        <div class="col-md-2 col-lg-2"></div>
+                    </li><hr><br>
+                    {% endfor%}
+                </ul>         
+            </div>               
+        </div>
+        <div class="col-lg-2 col-md-2"></div>
+    </div>
+</div>
+{% endblock %}

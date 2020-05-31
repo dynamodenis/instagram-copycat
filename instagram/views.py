@@ -33,4 +33,4 @@ def profile(request):
 def comment(request,image_id):
     image=Image.objects.get(pk=image_id)
     comments=Image.get_comments(image_id)
-    return render(request, 'instagram:comment.html',{'image':image,'comments':comments})
+    return render(request, 'instagram/comment.html',{'image':image,'comments':comments})

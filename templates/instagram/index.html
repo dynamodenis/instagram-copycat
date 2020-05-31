@@ -15,9 +15,9 @@
                 <div>
                     <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a>
                 </div>
-                <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
+                <a href="{% url 'instagram:comment' image.pk %}"><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
                 <div class="card-body">
-                    <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}"><i class="far fa-comment"></i> </a> <i class="far fa-heart"></i></p>
+                    <p> <a href="{% url 'instagram:comment' image.pk %}" style="font-size: 1.8em; text-decoration: none; color: black;"><i class="far fa-comment"></i> </a> <i class="far fa-heart"></i></p>
                     <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
                 </div>
                 
