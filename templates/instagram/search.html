@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static%}
+{% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            {% if searches%}
+            <h2>Found {{ searches|length }} of searched term {{message}}</h2>
+            <ul style="list-style-type: none;" class="ml-3">
+                {% for user in searches%}
+                <li>
+                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            {% else %}
+            <h2> Found 0 articles for the search term {{message}}</h2>
+            {% endif %}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
+    </div>
+</div>
+{% endblock %}

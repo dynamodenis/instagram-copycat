@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile,Image,Comments
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required
@@ -64,3 +64,17 @@ def likes(request):
         image.likes.add(request.user)
         is_liked=True
     return HttpResponseRedirect(reverse('instagram:comment', args=(image.id,)))
+
+
+def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term=request.GET.get('search')
+        searched=User.objects.filter(username=search_term)
+        message=f'{search_term}'
+        
+        return render(request, 'instagram/search.html', {'searches':searched,'message':message})
+    
+    else:
+        message='Search not found!'
+        return render(request,'instagram/search',{'message':message})
+        
