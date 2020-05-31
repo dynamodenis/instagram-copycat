@@ -78,3 +78,8 @@ def search(request):
         message='Search not found!'
         return render(request,'instagram/search',{'message':message})
         
+        
+#VIEW FOR A PARICULAR IMAGE USER
+def post_user(request, user_id):
+    user=User.objects.get(pk=user_id)
+    return render(request,'instagram/image_user.html',{'user':user})

@@ -12,11 +12,11 @@
         <div class="col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             {% if searches%}
-            <h2>Found {{ searches|length }} of searched term {{message}}</h2>
+            <h4 class="mt-3">Found {{ searches|length }} of searched term {{message}}</h4>
             <ul style="list-style-type: none;" class="ml-3">
                 {% for user in searches%}
                 <li>
-                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a>
+                    <img class="m-2 rounded-circle" src="{{user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{user.username}}</a>
                 </li>
                 {% endfor %}
             </ul>

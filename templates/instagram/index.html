@@ -13,7 +13,7 @@
         <div class="col-lg-8 col-md-8 mt-2">
             <div class="card m-3" style="width: auto; margin-left: 10px;">
                 <div>
-                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a>
+                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:post_user' image.user.id %}" style="text-decoration: none;">{{image.user.username}}</a>
                 </div>
                 <a href="{% url 'instagram:comment' image.pk %}"><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
                 <div class="card-body">

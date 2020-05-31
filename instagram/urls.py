@@ -10,6 +10,7 @@ urlpatterns=[
     path('<int:image_id>/comment/',views.comment, name='comment'),
     path('like/',views.likes, name='likes'),
     path('search/',views.search, name='search'),
+    path('<int:user_id>/profile',views.post_user, name='post_user'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
