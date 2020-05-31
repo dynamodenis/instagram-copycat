@@ -8,6 +8,7 @@ urlpatterns=[
     path('create/post/',views.new_image, name='new_image'),
     path('profile/',views.profile, name='profile'),
     path('<int:image_id>/comment/',views.comment, name='comment'),
+    path('like/',views.likes, name='likes'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
