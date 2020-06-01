@@ -12,6 +12,8 @@ from PIL import Image
 @login_required
 def index(request):
     images=Images.objects.order_by('-posted')
+    user=User.objects.get(pk=request.user.id)
+    images=user.profile.following.all()
     return render(request,'instagram/index.html',{'images':images})
 
 @login_required

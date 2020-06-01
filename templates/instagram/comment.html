@@ -11,7 +11,7 @@
         <div class="col-lg-8 col-md-8 mt-2">
             <div class="card m-3" style="width: auto; margin-left: 10px;">
                 <div>
-                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a>
+                    <img class="m-2 rounded-circle" src="{{image.user.profile.picture.url}}" alt="" style="height: 40px; width: 40px;"><a href="{% url 'instagram:profile'%}" style="text-decoration: none;">{{image.user.username}}</a><span></span><span class="small ml-2">{{image.posted |  date:"M d,Y,f A"}}</span>
                 </div>
                 <a href=""><img src="{{image.image.url}}" class="card-img-top img-responsive index_image" id="image" alt="IMAGE" title="" style="height:70vh; width: 100%;" ></a>
                 <div class="card-body">
@@ -28,7 +28,7 @@
                         </p>
                     </div>
                     <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>
-                    <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
+                    <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:post_user' image.user.id%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
 
                     <form  action="{%url 'instagram:comment' image.pk%}" method="post" enctype="multipart/form-data">
                         {%csrf_token%}

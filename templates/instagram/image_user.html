@@ -7,37 +7,36 @@
 {% block content%}
 <div class="container-fluid">
 <div class="row mt-4">
-    <div class="col-md-2 col-lg-3"></div>
-    <div class="col-md-8 col-lg-6 col-sm-10">
+    <div class="col-md-2 col-lg-2"></div>
+    <div class="col-md-8 col-lg-8 col-sm-10">
         <div class="card  mb-3" style="width: 100%;">
-            <div class="row ">
-                <div class="col-lg-6 col-xs-12 ml-2">
-                    <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 200px; height: 220px;">
-                </div>
-                <div class="col-lg-6 col-xs-12">
-                    <h2 class="card-title">{{user.username}}</h2>
-                    <hr style="border-width: 2px;">
-                    <p class="card-text">Email Adress: {{user.email}}</p>
-                    {% if profile.bio%}
-                    <p class="card-text">About Me: {{user.profile.bio}}</p>
-                    {%endif%} 
-                    <p>Followers <span class="badge badge-default">{{user.profile.followers.count}}</span></p>
-                    <p>Following <span class="badge badge-secondary">{{user.profile.following.count}}</span></p>
-                    <div>
-                        <form action="{% url 'instagram:follow'%}" method="POST">
-                            {% csrf_token%}
-                            {%  if is_followed%}
-                                <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-danger btn-sm">Unfollow</button>
-                            {% else %}
-                                <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-primary btn-sm">Follow</button>
-                            {% endif %}
-                        </form>
+            <div class="container-fluid" >
+                <div class="row mb-2">
+                    <div class="col-lg-4 col-md-4 col-xs-12 ml-2 mt-2 ">
+                        <img src="{{user.profile.picture.url}}" class="img-circle rounded-circle image-fluid" alt="..." style="width: 220px; height: 220px;">
+                    </div>
+                
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <h2 class="card-title">{{user.username}}</h2>
+                        <p class="card-text">Email Adress: {{user.email}}</p> 
+                        <div class="form-inline ">
+                        <p>Followers <span class="badge badge-dark mr-3">{{user.profile.followers.count}}</span></p>
+                        <p>Following <span class="badge badge-secondary">{{user.profile.following.count}}</span></p>
+                        </div>
+                        {% if user.profile.bio%}
+                        <p class="card-text">About Me: {{user.profile.bio}}</p>
+                        {%endif%}
+
+                        {% if user.id is request.user.id%}
+                        <a href="{% url 'instagram:update_profile' %}" class="btn btn-success btn-sm"><small>Update Settings</small></a>
+                        {% endif%}
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-2 col-lg-3"></div>
+    <div class="col-md-2 col-lg-2"></div>
 </div>
 </div>
 <div class="row">
@@ -50,7 +49,7 @@
                     <div class="card-body">
                         <p style="font-size: 1.8em;"> <a href="{% url 'instagram:comment' image.pk %}" style="text-decoration: none; color: black;"><i class="far fa-comment"></i> </a style="text-decoration: none; color: black;"> <i class="far fa-heart"></i></p>
                         <p class="" style="font-weight:bolder ;">{{image.likes.count}} <span class="ml-1">likes</span></p>
-                        <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:profile'%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
+                        <p class="card-text" style="font-size: 0.9em;"><a href="{% url 'instagram:post_user' image.user.id%}" class="mr-1" style="font-weight: bolder ; text-decoration: none;">{{image.user.username}}</a>{{image.image_caption}}</p>
 
                     </div>  
                 </div>               
