@@ -21,10 +21,16 @@
                     {% if profile.bio%}
                     <p class="card-text">About Me: {{user.profile.bio}}</p>
                     {%endif%} 
+                    <p>Followers <span class="badge badge-default">{{user.profile.followers.count}}</span></p>
+                    <p>Following <span class="badge badge-secondary">{{user.profile.following.count}}</span></p>
                     <div>
                         <form action="{% url 'instagram:follow'%}" method="POST">
                             {% csrf_token%}
-                            <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-primary btn-sm">Follow</button>
+                            {%  if is_followed%}
+                                <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-danger btn-sm">Unfollow</button>
+                            {% else %}
+                                <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-primary btn-sm">Follow</button>
+                            {% endif %}
                         </form>
                     </div>
                 </div>

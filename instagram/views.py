@@ -88,8 +88,16 @@ def likes(request):
 def follow(request):
     current_user=request.user
     user=get_object_or_404(User, pk=request.POST.get('user_id'))
-    user.profile.followers.add(request.user)
-    current_user.profile.following.add(user)
+    is_followed=False
+    if user.profile.followers.filter(id=request.user.id):
+        user.profile.followers.remove(request.user)
+        current_user.profile.following.remove(user)
+        is_followed=False
+    
+    else:
+        user.profile.followers.add(request.user)
+        current_user.profile.following.add(user)
+        is_followed=True
     return HttpResponseRedirect(reverse('instagram:post_user', args=(user.id,)))
 
 def search(request):
@@ -108,4 +116,8 @@ def search(request):
 #VIEW FOR A PARICULAR IMAGE USER
 def post_user(request, user_id):
     user=User.objects.get(pk=user_id)
-    return render(request,'instagram/image_user.html',{'user':user})
+    #SEARCHES IF THE CURRENT USER IS ALLREADY FOLLOWING THE USER
+    is_followed=False
+    if user.profile.followers.filter(id=request.user.id):
+        is_followed=True
+    return render(request,'instagram/image_user.html',{'user':user,'is_followed':is_followed})
