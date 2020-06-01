@@ -4,7 +4,7 @@ Developer: Dynamo Denis Mbugua
 
 Email: dmbugua66@gmail.com
 
-To run this site click [here](https://dynamo-gala.herokuapp.com/)
+To run this site click [here](https://dynamo-poster.herokuapp.com/)
 
 Location: Nairobi, Kenya
 
