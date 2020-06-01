@@ -30,7 +30,17 @@
                         {% if user.id is request.user.id%}
                         <a href="{% url 'instagram:update_profile' %}" class="btn btn-success btn-sm"><small>Update Settings</small></a>
                         {% endif%}
-
+                        <!-- Follow and Followers -->
+                        <div>
+                            <form action="{% url 'instagram:follow'%}" method="POST">
+                                {% csrf_token%}
+                                {%  if is_followed%}
+                                    <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-danger btn-sm">Following</button>
+                                {% else %}
+                                    <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-primary btn-sm">Follow</button>
+                                {% endif %}
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

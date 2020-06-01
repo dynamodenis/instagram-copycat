@@ -11,9 +11,12 @@ from PIL import Image
 # Create your views here.
 @login_required
 def index(request):
-    images=Images.objects.order_by('-posted')
+    # images=Images.objects.order_by('-posted')
     user=User.objects.get(pk=request.user.id)
-    images=user.profile.following.all()
+    users=user.profile.following.all()
+    print(users)
+    for user in users:
+        images=user.images_set.order_by('-posted')
     return render(request,'instagram/index.html',{'images':images})
 
 @login_required
