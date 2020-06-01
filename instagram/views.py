@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from PIL import Image
+import numpy as np
 
 # Create your views here.
 @login_required
@@ -14,9 +15,21 @@ def index(request):
     # images=Images.objects.order_by('-posted')
     user=User.objects.get(pk=request.user.id)
     users=user.profile.following.all()
-    for user in users:
-        images=user.images_set.order_by('-posted')
-    return render(request,'instagram/index.html',{'images':images})
+    if users:
+        for user in users:
+            followers_images=user.images_set.order_by('-posted')
+        current_user=request.user    
+        user_images=current_user.images_set.order_by('-posted')
+        
+        images=np.concatenate((user_images,followers_images,))
+
+        return render(request,'instagram/index.html',{'images':images})  
+    
+    else:
+        messages.warning(request,f'You currently are not following anybody. Search and follow users to view posts!')
+    
+    return render(request,'instagram/index.html')    
+        
 
 @login_required
 def new_image(request):

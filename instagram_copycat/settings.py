@@ -43,6 +43,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS',cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
+    'numpy',
     'bootstrap4',
     'crispy_forms',
     'register.apps.RegisterConfig',
