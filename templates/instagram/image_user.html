@@ -21,6 +21,12 @@
                     {% if profile.bio%}
                     <p class="card-text">About Me: {{user.profile.bio}}</p>
                     {%endif%} 
+                    <div>
+                        <form action="{% url 'instagram:follow'%}" method="POST">
+                            {% csrf_token%}
+                            <button type="submit" name='user_id' value="{{user.pk}}" class="btn btn-primary btn-sm">Follow</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

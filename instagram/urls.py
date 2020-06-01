@@ -9,6 +9,7 @@ urlpatterns=[
     path('profile/',views.profile, name='profile'),
     path('<int:image_id>/comment/',views.comment, name='comment'),
     path('like/',views.likes, name='likes'),
+    path('follow/',views.follow, name='follow'),
     path('search/',views.search, name='search'),
     path('<int:user_id>/profile',views.post_user, name='post_user'),
     path('update/',views.update_profile, name='update_profile'),

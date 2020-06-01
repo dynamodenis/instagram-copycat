@@ -84,7 +84,13 @@ def likes(request):
         image.likes.add(request.user)
         is_liked=True
     return HttpResponseRedirect(reverse('instagram:comment', args=(image.id,)))
-
+#FOLLOW BUTTON
+def follow(request):
+    current_user=request.user
+    user=get_object_or_404(User, pk=request.POST.get('user_id'))
+    user.profile.followers.add(request.user)
+    current_user.profile.following.add(user)
+    return HttpResponseRedirect(reverse('instagram:post_user', args=(user.id,)))
 
 def search(request):
     if 'search' in request.GET and request.GET['search']:
