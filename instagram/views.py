@@ -14,7 +14,6 @@ def index(request):
     # images=Images.objects.order_by('-posted')
     user=User.objects.get(pk=request.user.id)
     users=user.profile.following.all()
-    print(users)
     for user in users:
         images=user.images_set.order_by('-posted')
     return render(request,'instagram/index.html',{'images':images})
